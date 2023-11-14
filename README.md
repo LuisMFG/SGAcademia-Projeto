@@ -10,8 +10,8 @@ Java + Swing
 
 ## Grupo:
 
-- [@Luis Marcelo](https://github.com/LuisMFG)
-- [@Vitoria Oliveira] (https://github.com/vyvisz)
+- [@Luis Marcelo](https://github.com/LuisMFG);
+- [@Vitória] (https://github.com/vyvisz)
 - [@Asafe Lucca]
 - [@Marya Clara]
 
