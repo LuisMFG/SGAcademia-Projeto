@@ -14,6 +14,7 @@ Java + Swing
 - [@Vitoria](https://github.com/vyvisz);
 - [@Marya Clara]
 - [@Asafe Lucca]
+- [@Aleatorio]
 
 
 
