@@ -11,9 +11,10 @@ Java + Swing
 ## Grupo:
 
 - [@Luis Marcelo](https://github.com/LuisMFG);
-- [@Vitória] (https://github.com/vyvisz)
-- [@Asafe Lucca]
+- [@Vitoria](https://github.com/vyvisz);
 - [@Marya Clara]
+- [@Asafe Lucca]
+
 
 
 
