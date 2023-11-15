@@ -14,9 +14,8 @@ public class SistemaAcademiaGUI {
         }
 
         exibirMenu(academia);
-        
+
     }
-    
 
     private static void exibirMenu(Academia academia) {
         while (true) {
