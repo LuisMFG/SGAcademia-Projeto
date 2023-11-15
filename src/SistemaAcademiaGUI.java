@@ -202,7 +202,7 @@ public class SistemaAcademiaGUI {
                     funcionarioLogado = true;
 
                     // Retorna à tela de opção de login após o login bem-sucedido
-                    exibirMenu(academia);
+                    exibirMenuInstrutor(academia);
                     return;
                 }
             }
@@ -441,5 +441,48 @@ public class SistemaAcademiaGUI {
 
     private static void exibirMensagemErro(String mensagem) {
         JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private static void exibirMenuInstrutor(Academia academia) {
+        while (true) {
+            String[] opcoesInstrutor = {
+                    "Criar Ficha", "Visualizar Ficha", "Adicionar Exercício", "Voltar pro Login",
+                    "Sair"
+            };
+
+            int escolhaInstrutor = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesInstrutor);
+
+            try {
+                if (escolhaInstrutor >= 0 && escolhaInstrutor < opcoesInstrutor.length) {
+                    processarEscolhaInstrutor(academia, escolhaInstrutor);
+                } else {
+                    exibirMensagemErro("Opção inválida. Tente novamente.");
+                }
+            } catch (NumberFormatException e) {
+                exibirMensagemErro("Erro: Insira um número válido.");
+            } catch (Exception e) {
+                exibirMensagemErro("Ocorreu um erro inesperado: " + e.getMessage());
+            }
+        }
+    }
+
+    private static void processarEscolhaInstrutor(Academia academia, int escolhaInstrutor) {
+        switch (escolhaInstrutor) {
+            case 0:
+                criarFicha(academia);
+                break;
+            case 1:
+                visualizarFicha(academia);
+                break;
+            case 2:
+                adicionarExercicio(academia);
+                break;
+            case 3:
+                realizarLogin(academia);
+                break;
+            case 4:
+                exibirMensagem("Saindo do programa.");
+                System.exit(0);
+        }
     }
 }
