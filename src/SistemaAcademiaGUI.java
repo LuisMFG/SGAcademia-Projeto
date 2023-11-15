@@ -14,7 +14,9 @@ public class SistemaAcademiaGUI {
         }
 
         exibirMenu(academia);
+        System.out.println("teste de sincronizacao");
     }
+    
 
     private static void exibirMenu(Academia academia) {
         while (true) {
