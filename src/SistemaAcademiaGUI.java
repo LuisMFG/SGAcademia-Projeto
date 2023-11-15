@@ -153,6 +153,49 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    private static void exibirMenuTreinador(Academia academia) {
+        while (true) {
+            String[] opcoesTreinador = {
+                    "Criar Ficha", "Visualizar Ficha", "Adicionar Exercício", "Voltar pro Login",
+                    "Sair"
+            };
+
+            int escolhaTreinador = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesTreinador);
+
+            try {
+                if (escolhaTreinador >= 0 && escolhaTreinador < opcoesTreinador.length) {
+                    processarEscolhaTreinador(academia, escolhaTreinador);
+                } else {
+                    exibirMensagemErro("Opção inválida. Tente novamente.");
+                }
+            } catch (NumberFormatException e) {
+                exibirMensagemErro("Erro: Insira um número válido.");
+            } catch (Exception e) {
+                exibirMensagemErro("Ocorreu um erro inesperado: " + e.getMessage());
+            }
+        }
+    }
+
+    private static void processarEscolhaTreinador(Academia academia, int escolhaTreinador) {
+        switch (escolhaTreinador) {
+            case 0:
+                criarFicha(academia);
+                break;
+            case 1:
+                visualizarFicha(academia);
+                break;
+            case 2:
+                adicionarExercicio(academia);
+                break;
+            case 3:
+                realizarLogin(academia);
+                break;
+            case 4:
+                exibirMensagem("Saindo do programa.");
+                System.exit(0);
+        }
+    }
+
     private static void realizarLogin(Academia academia) {
         String[] opcoesLogin = { "Login Funcionário", "Login Cliente", "Login Treinador", "Login Instrutor", "Sair" };
         int escolhaLogin = exibirOpcoes("Escolha uma opção de login:", "Login", opcoesLogin);
@@ -250,7 +293,7 @@ public class SistemaAcademiaGUI {
                     funcionarioLogado = true;
 
                     // Retorna à tela de opção de login após o login bem-sucedido
-                    exibirMenu(academia);
+                    exibirMenuTreinador(academia);
                     return;
                 }
             }
