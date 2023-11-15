@@ -138,7 +138,7 @@ public class SistemaAcademiaGUI {
                     funcionarioLogado = true;
 
                     // Retorna à tela de opção de login após o login bem-sucedido
-                    exibirMenu(academia);
+                    exibirMenuCliente(academia);
                     return;
                 }
             }
@@ -480,6 +480,42 @@ public class SistemaAcademiaGUI {
                 realizarLogin(academia);
                 break;
             case 4:
+                exibirMensagem("Saindo do programa.");
+                System.exit(0);
+        }
+    }
+
+    private static void exibirMenuCliente(Academia academia) {
+        while (true) {
+            String[] opcoesCliente = {
+                    "Visualizar Ficha", "Voltar pro Login", "Sair"
+            };
+
+            int escolhaCliente = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesCliente);
+
+            try {
+                if (escolhaCliente >= 0 && escolhaCliente < opcoesCliente.length) {
+                    processarEscolhaCliente(academia, escolhaCliente);
+                } else {
+                    exibirMensagemErro("Opção inválida. Tente novamente.");
+                }
+            } catch (NumberFormatException e) {
+                exibirMensagemErro("Erro: Insira um número válido.");
+            } catch (Exception e) {
+                exibirMensagemErro("Ocorreu um erro inesperado: " + e.getMessage());
+            }
+        }
+    }
+
+    private static void processarEscolhaCliente(Academia academia, int escolhaCliente) {
+        switch (escolhaCliente) {
+            case 0:
+                visualizarFicha(academia);
+                break;
+            case 1:
+                realizarLogin(academia);
+                break;
+            case 2:
                 exibirMensagem("Saindo do programa.");
                 System.exit(0);
         }
