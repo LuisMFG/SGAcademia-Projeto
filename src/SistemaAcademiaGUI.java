@@ -14,7 +14,7 @@ public class SistemaAcademiaGUI {
         }
 
         exibirMenu(academia);
-        System.out.println("teste de sincronizacao");
+        
     }
     
 
