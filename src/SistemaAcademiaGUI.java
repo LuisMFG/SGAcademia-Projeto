@@ -11,6 +11,7 @@ public class SistemaAcademiaGUI {
 
         while (!funcionarioLogado) {
             realizarLogin(academia);
+            System.out.println(teste);
         }
 
         exibirMenu(academia);
