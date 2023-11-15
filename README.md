@@ -12,7 +12,7 @@ Java + Swing
 
 - [@Luis Marcelo](https://github.com/LuisMFG);
 - [@Vitoria](https://github.com/vyvisz);
-- [@Marya Clara]
+- [@Marya Clara](https://github.com/Ayram450);
 - [@Asafe Lucca]
 
 
