@@ -11,7 +11,7 @@ public class SistemaAcademiaGUI {
 
         while (!funcionarioLogado) {
             realizarLogin(academia);
-            System.out.println(teste);
+
         }
 
         exibirMenu(academia);
@@ -152,7 +152,6 @@ public class SistemaAcademiaGUI {
                 System.exit(0);
         }
     }
-    
 
     private static void realizarLogin(Academia academia) {
         String[] opcoesLogin = { "Login Funcionário", "Login Cliente", "Login Treinador", "Login Instrutor", "Sair" };
@@ -523,5 +522,4 @@ public class SistemaAcademiaGUI {
         JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
-    
 }
