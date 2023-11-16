@@ -1,10 +1,13 @@
+// Classe que representa um funcionário da academia, estendendo a classe Pessoa
 public class Funcionario extends Pessoa {
-    private String dataAdmissao;
-    private String dataDemissao;
-    private double remuneracao;
-    private String dataRemuneracao;
-    private String expediente;
+    // Atributos específicos de um funcionário
+    private String dataAdmissao;     // Data de admissão do funcionário
+    private String dataDemissao;     // Data de demissão do funcionário
+    private double remuneracao;      // Remuneração do funcionário
+    private String dataRemuneracao;  // Data de pagamento da remuneração
+    private String expediente;       // Expediente de trabalho do funcionário
 
+    // Construtor que inicializa os atributos da classe e os herdados da classe Pessoa
     public Funcionario(String nome, String dataNascimento, String endereco, String cep,
             String email, String telefone, String login, String senha,
             String dataAdmissao, String dataDemissao, double remuneracao,
@@ -17,6 +20,7 @@ public class Funcionario extends Pessoa {
         this.expediente = expediente;
     }
 
+    // Métodos para acessar e modificar os atributos da classe
     public String getDataAdmissao() {
         return dataAdmissao;
     }
@@ -57,6 +61,7 @@ public class Funcionario extends Pessoa {
         this.expediente = expediente;
     }
 
+    // Sobrescrita do método toString para fornecer uma representação em string do objeto
     @Override
     public String toString() {
         return "Funcionario: " + getNome() + " (Remuneracao: " + remuneracao + ")";

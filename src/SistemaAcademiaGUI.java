@@ -1,23 +1,33 @@
+// Importa a classe Swing necessária para criar a interface gráfica
 import javax.swing.*;
 
+// Classe principal que representa a interface gráfica do sistema da academia
 public class SistemaAcademiaGUI {
+     // Constantes para login padrão do funcionário
     private static final String LOGIN_FUNCIONARIO_PADRAO = "Admin";
     private static final String SENHA_FUNCIONARIO_PADRAO = "Admin";
 
+    // Variáveis de controle de login
     private static boolean funcionarioLogado = false;
+    private static Cliente clienteLogado = null;
 
+    // Método principal que inicia o programa
     public static void main(String[] args) {
+        // Instância da classe que representa a academia
         Academia academia = new Academia();
 
+        // Loop de login do funcionário
         while (!funcionarioLogado) {
             realizarLogin(academia);
 
         }
 
+        // Exibe o menu principal após o login
         exibirMenu(academia);
 
     }
 
+     // Métodos para exibir diferentes menus e processar escolhas
     private static void exibirMenu(Academia academia) {
         while (true) {
             String[] opcoes = {
@@ -57,7 +67,7 @@ public class SistemaAcademiaGUI {
                 criarFicha(academia);
                 break;
             case 4:
-                visualizarFicha(academia);
+                visualizarTodasAsFichas(academia);
                 break;
             case 5:
                 adicionarExercicio(academia);
@@ -103,7 +113,7 @@ public class SistemaAcademiaGUI {
                 criarFicha(academia);
                 break;
             case 1:
-                visualizarFicha(academia);
+                visualizarTodasAsFichas(academia);
                 break;
             case 2:
                 adicionarExercicio(academia);
@@ -120,7 +130,7 @@ public class SistemaAcademiaGUI {
     private static void exibirMenuCliente(Academia academia) {
         while (true) {
             String[] opcoesCliente = {
-                    "Visualizar Ficha", "Voltar pro Login", "Sair"
+                    "Visualizar Sua Ficha", "Voltar pro Login", "Sair"
             };
 
             int escolhaCliente = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesCliente);
@@ -142,7 +152,7 @@ public class SistemaAcademiaGUI {
     private static void processarEscolhaCliente(Academia academia, int escolhaCliente) {
         switch (escolhaCliente) {
             case 0:
-                visualizarFicha(academia);
+                visualizarFicha(academia, clienteLogado);
                 break;
             case 1:
                 realizarLogin(academia);
@@ -182,7 +192,7 @@ public class SistemaAcademiaGUI {
                 criarFicha(academia);
                 break;
             case 1:
-                visualizarFicha(academia);
+                visualizarFicha(academia, clienteLogado);
                 break;
             case 2:
                 adicionarExercicio(academia);
@@ -219,16 +229,21 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Método para realizar o login do funcionário
     private static void realizarLoginFuncionario(Academia academia) {
+        // Loop para solicitar login e senha até que o login seja bem-sucedido
         while (true) {
             String login = JOptionPane.showInputDialog("Digite o login do funcionário:");
             String senha = JOptionPane.showInputDialog("Digite a senha do funcionário:");
 
+             // Verifica se o login e a senha correspondem ao padrão
             if (LOGIN_FUNCIONARIO_PADRAO.equals(login) && SENHA_FUNCIONARIO_PADRAO.equals(senha)) {
                 exibirMensagem("Login de funcionário bem-sucedido.");
                 funcionarioLogado = true;
+                exibirMenu(academia);
                 return;
             } else {
+                // Se o login falhar, dá a opção de tentar novamente ou sair
                 int opcao = JOptionPane.showConfirmDialog(null,
                         "Login de funcionário falhou. Tente novamente.",
                         "Erro de Login", JOptionPane.YES_NO_OPTION);
@@ -240,35 +255,30 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Métodos para realizar o login de cliente, treinador e instrutor
     private static void realizarLoginCliente(Academia academia) {
         while (true) {
             String login = JOptionPane.showInputDialog("Digite o login do cliente:");
-
-            // Tratamento para Cancelar ou fechar a janela
+    
             if (login == null) {
                 exibirMensagem("Operação de login cancelada.");
                 realizarLogin(academia);
-
                 return;
             }
-
+    
             String senha = JOptionPane.showInputDialog("Digite a senha do cliente:");
-
-            // Busca eficiente no conjunto de pessoas
+    
             for (Pessoa pessoa : academia.getPessoas()) {
                 if (pessoa instanceof Cliente && pessoa.getLogin().equals(login) && pessoa.getSenha().equals(senha)) {
                     exibirMensagem("Login de cliente bem-sucedido.");
+                    clienteLogado = (Cliente) pessoa;
                     funcionarioLogado = true;
-
-                    // Retorna à tela de opção de login após o login bem-sucedido
                     exibirMenuCliente(academia);
                     return;
                 }
             }
-
-            // Mensagem de erro se o login falhar
+    
             exibirMensagem("Login de cliente falhou. Tente novamente.");
-            realizarLogin(academia);
         }
     }
 
@@ -335,6 +345,7 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Métodos para cadastrar cliente, treinador e instrutor
     private static void cadastrarCliente(Academia academia) {
         String nome = JOptionPane.showInputDialog("Digite o nome do cliente:");
         if (nome != null && !nome.isEmpty()) {
@@ -407,6 +418,7 @@ public class SistemaAcademiaGUI {
         }
     }
 
+     // Métodos para criar, visualizar e adicionar exercícios em fichas
     private static void criarFicha(Academia academia) {
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
@@ -457,7 +469,7 @@ public class SistemaAcademiaGUI {
         }
     }
 
-    private static void visualizarFicha(Academia academia) {
+    private static void visualizarTodasAsFichas(Academia academia) {
         if (academia.getFichas().isEmpty()) {
             exibirMensagemErro("Não há fichas de academia criadas no sistema.");
         } else {
@@ -491,6 +503,52 @@ public class SistemaAcademiaGUI {
             }
         }
     }
+
+    private static void visualizarFicha(Academia academia, Cliente clienteLogado) {
+    if (academia.getFichas().isEmpty()) {
+        exibirMensagemErro("Não há fichas de academia criadas no sistema.");
+    } else {
+        String[] nomesClientes = new String[academia.getFichas().size()];
+        for (int i = 0; i < academia.getFichas().size(); i++) {
+            nomesClientes[i] = academia.getFichas().get(i).getNomeCliente();
+        }
+
+        if (clienteLogado != null) {
+            String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
+                    "Selecione um cliente para visualizar a ficha:",
+                    "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null, nomesClientes,
+                    nomesClientes[0]);
+
+            if (nomeClienteSelecionado != null) {
+                // Verifica se a ficha pertence ao cliente logado
+                if (!nomeClienteSelecionado.equals(clienteLogado.getNome())) {
+                    exibirMensagemErro("Você não tem permissão para visualizar a ficha de outro cliente.");
+                    return;
+                }
+
+                for (FichaAcademia ficha : academia.getFichas()) {
+                    if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
+                        StringBuilder fichaTexto = new StringBuilder(
+                                "Ficha de " + nomeClienteSelecionado + ":\n");
+
+                        for (int i = 0; i < ficha.getExercicios().size(); i++) {
+                            fichaTexto.append("Exercício: ").append(ficha.getExercicios().get(i))
+                                    .append(", Séries: ").append(ficha.getSeries().get(i))
+                                    .append(", Repetições: ").append(ficha.getRepeticoes().get(i))
+                                    .append("\n");
+                        }
+
+                        exibirMensagem(fichaTexto.toString());
+                        return;
+                    }
+                }
+            }
+        } else {
+            // Caso não haja cliente logado, encerra a visualização
+            exibirMensagemErro("Nenhum cliente logado. Realize o login como cliente para acessar sua ficha.");
+        }
+    }
+}
 
     private static void adicionarExercicio(Academia academia) {
         if (academia.getPessoas().isEmpty()) {
@@ -533,18 +591,22 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Método para listar todas as pessoas cadastradas na academia
     private static void listarPessoas(Academia academia) {
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
         } else {
+             // Constrói uma mensagem com as pessoas cadastradas
             StringBuilder pessoasCadastradas = new StringBuilder("Pessoas cadastradas na academia:\n");
             for (Pessoa pessoa : academia.getPessoas()) {
                 pessoasCadastradas.append(pessoa).append("\n");
             }
+             // Exibe a mensagem com as pessoas cadastradas
             exibirMensagem(pessoasCadastradas.toString());
         }
     }
 
+      // Método para exibir opções em uma caixa de diálogo
     private static int exibirOpcoes(String mensagem, String titulo, String[] opcoes) {
         return JOptionPane.showOptionDialog(
                 null,
@@ -557,6 +619,7 @@ public class SistemaAcademiaGUI {
                 opcoes[0]);
     }
 
+     // Métodos auxiliares para exibir mensagens
     private static void exibirMensagem(String mensagem) {
         JOptionPane.showMessageDialog(null, mensagem);
     }

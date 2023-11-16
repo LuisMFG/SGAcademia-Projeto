@@ -1,13 +1,16 @@
+// Classe base que representa uma pessoa genérica
 public class Pessoa {
-    private String nome;
-    private String dataNascimento;
-    private String endereco;
-    private String cep;
-    private String email;
-    private String telefone;
-    private String login;
-    private String senha;
+    // Atributos que armazenam informações pessoais
+    private String nome;            // Nome da pessoa
+    private String dataNascimento;  // Data de nascimento da pessoa
+    private String endereco;        // Endereço da pessoa
+    private String cep;             // Código de Endereçamento Postal (CEP)
+    private String email;           // Endereço de e-mail da pessoa
+    private String telefone;        // Número de telefone da pessoa
+    private String login;           // Nome de usuário para login
+    private String senha;           // Senha para autenticação
 
+    // Construtor que inicializa os atributos da classe
     public Pessoa(String nome, String dataNascimento, String endereco, String cep,
             String email, String telefone, String login, String senha) {
         this.nome = nome;
@@ -20,6 +23,7 @@ public class Pessoa {
         this.senha = senha;
     }
 
+    // Métodos para acessar e modificar os atributos da classe
     public String getNome() {
         return nome;
     }
@@ -79,5 +83,4 @@ public class Pessoa {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
 }
