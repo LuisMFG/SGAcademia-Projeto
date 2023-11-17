@@ -1,3 +1,4 @@
+
 // Importa a classe Swing necessária para criar a interface gráfica
 import javax.swing.*;
 
@@ -359,12 +360,11 @@ public class SistemaAcademiaGUI {
             String telefone = JOptionPane.showInputDialog("Digite o telefone do cliente:");
             String login = JOptionPane.showInputDialog("Digite o login do cliente:");
             String senha = JOptionPane.showInputDialog("Digite a senha do cliente:");
-            int idade = Integer.parseInt(JOptionPane.showInputDialog("Digite a idade do cliente:"));
 
-            Cliente cliente = new Cliente(nome, dataNascimento, endereco, cep, email, telefone, login,
-                    senha, idade, senha, senha, senha);
+            Cliente cliente = new Cliente(nome, dataNascimento, endereco, cep, email, telefone,
+                    login, senha);
             academia.adicionarPessoa(cliente);
-            exibirMensagem("Cliente adicionado com sucesso.");
+            exibirMensagem("Cliente adicionado com sucesso. ID: " + cliente.getId());
         } else {
             exibirMensagemErro("Nome do cliente inválido.");
         }
@@ -383,10 +383,10 @@ public class SistemaAcademiaGUI {
             double taxaMensalAcademia = Double
                     .parseDouble(JOptionPane.showInputDialog("Digite a taxa mensal do treinador:"));
 
-            Treinador treinador = new Treinador(nome, dataNascimento, endereco, cep, email, telefone, login,
-                    senha, taxaMensalAcademia);
+            Treinador treinador = new Treinador(nome, dataNascimento, endereco, cep, email, telefone,
+                    login, senha, taxaMensalAcademia);
             academia.adicionarPessoa(treinador);
-            exibirMensagem("Treinador adicionado com sucesso.");
+            exibirMensagem("Treinador adicionado com sucesso. ID: " + treinador.getId());
         } else {
             exibirMensagemErro("Nome do treinador inválido.");
         }
@@ -599,7 +599,7 @@ public class SistemaAcademiaGUI {
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
         } else {
-            // Constrói uma mensagem com as pessoas cadastradas
+            // Constrói uma mensagem com as pessoas cadastradas, incluindo IDs
             StringBuilder pessoasCadastradas = new StringBuilder("Pessoas cadastradas na academia:\n");
             for (Pessoa pessoa : academia.getPessoas()) {
                 pessoasCadastradas.append(pessoa).append("\n");
