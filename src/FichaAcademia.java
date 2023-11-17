@@ -5,13 +5,14 @@ import java.util.List;
 public class FichaAcademia {
     // Nome do cliente associado à ficha
     private String nomeCliente;
-    
+
     // Listas para armazenar os exercícios, séries e repetições da ficha
     private List<String> exercicios;
     private List<Integer> series;
     private List<Integer> repeticoes;
 
-    // Construtor que inicializa o nome do cliente e as listas de exercícios, séries e repetições
+    // Construtor que inicializa o nome do cliente e as listas de exercícios, séries
+    // e repetições
     public FichaAcademia(String nomeCliente) {
         this.nomeCliente = nomeCliente;
         exercicios = new ArrayList<>();
@@ -24,7 +25,8 @@ public class FichaAcademia {
         return nomeCliente;
     }
 
-    // Método para adicionar um exercício à ficha com informações de série e repetição
+    // Método para adicionar um exercício à ficha com informações de série e
+    // repetição
     public void adicionarExercicio(String exercicio, int serie, int repeticao) {
         exercicios.add(exercicio);
         series.add(serie);

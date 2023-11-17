@@ -3,16 +3,18 @@ import java.util.List;
 
 // Classe que representa a entidade da academia, contendo informações sobre pessoas e fichas de academia
 public class Academia {
-    // Lista de pessoas cadastradas na academia (clientes, treinadores, instrutores e funcionários)
+    // Lista de pessoas cadastradas na academia (clientes, treinadores, instrutores
+    // e funcionários)
     private List<Pessoa> pessoas;
-    
+
     // Lista de fichas de academia criadas na academia
     private List<FichaAcademia> fichas;
-    
+
     // Referência para a pessoa (funcionário) que está atualmente logada no sistema
     private Pessoa funcionarioLogado;
 
-    // Construtor que inicializa as listas de pessoas e fichas ao instanciar a academia
+    // Construtor que inicializa as listas de pessoas e fichas ao instanciar a
+    // academia
     public Academia() {
         this.pessoas = new ArrayList<>();
         this.fichas = new ArrayList<>();
@@ -30,7 +32,8 @@ public class Academia {
 
     // Método para realizar o login de um funcionário na academia
     public boolean loginFuncionario(String login, String senha) {
-        // Itera sobre a lista de pessoas para encontrar um funcionário com as credenciais fornecidas
+        // Itera sobre a lista de pessoas para encontrar um funcionário com as
+        // credenciais fornecidas
         for (Pessoa pessoa : pessoas) {
             if (pessoa instanceof Funcionario) {
                 Funcionario funcionario = (Funcionario) pessoa;
@@ -62,7 +65,8 @@ public class Academia {
         return fichas;
     }
 
-    // Método de espaço reservado (placeholder) que deve ser implementado para retornar os nomes dos clientes
+    // Método de espaço reservado (placeholder) que deve ser implementado para
+    // retornar os nomes dos clientes
     public String[] getNomesClientes() {
         return null;
     }

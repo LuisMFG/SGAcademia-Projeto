@@ -3,7 +3,7 @@ import javax.swing.*;
 
 // Classe principal que representa a interface gráfica do sistema da academia
 public class SistemaAcademiaGUI {
-     // Constantes para login padrão do funcionário
+    // Constantes para login padrão do funcionário
     private static final String LOGIN_FUNCIONARIO_PADRAO = "Admin";
     private static final String SENHA_FUNCIONARIO_PADRAO = "Admin";
 
@@ -27,7 +27,7 @@ public class SistemaAcademiaGUI {
 
     }
 
-     // Métodos para exibir diferentes menus e processar escolhas
+    // Métodos para exibir diferentes menus e processar escolhas
     private static void exibirMenu(Academia academia) {
         while (true) {
             String[] opcoes = {
@@ -130,7 +130,7 @@ public class SistemaAcademiaGUI {
     private static void exibirMenuCliente(Academia academia) {
         while (true) {
             String[] opcoesCliente = {
-                    "Visualizar Sua Ficha", "Voltar pro Login", "Sair"
+                    "Visualizar Sua Ficha", "Realizar Pagamento", "Voltar pro Login", "Sair"
             };
 
             int escolhaCliente = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesCliente);
@@ -155,9 +155,12 @@ public class SistemaAcademiaGUI {
                 visualizarFicha(academia, clienteLogado);
                 break;
             case 1:
-                realizarLogin(academia);
+                realizarPagamento();
                 break;
             case 2:
+                realizarLogin(academia);
+                break;
+            case 3:
                 exibirMensagem("Saindo do programa.");
                 System.exit(0);
         }
@@ -236,7 +239,7 @@ public class SistemaAcademiaGUI {
             String login = JOptionPane.showInputDialog("Digite o login do funcionário:");
             String senha = JOptionPane.showInputDialog("Digite a senha do funcionário:");
 
-             // Verifica se o login e a senha correspondem ao padrão
+            // Verifica se o login e a senha correspondem ao padrão
             if (LOGIN_FUNCIONARIO_PADRAO.equals(login) && SENHA_FUNCIONARIO_PADRAO.equals(senha)) {
                 exibirMensagem("Login de funcionário bem-sucedido.");
                 funcionarioLogado = true;
@@ -259,15 +262,15 @@ public class SistemaAcademiaGUI {
     private static void realizarLoginCliente(Academia academia) {
         while (true) {
             String login = JOptionPane.showInputDialog("Digite o login do cliente:");
-    
+
             if (login == null) {
                 exibirMensagem("Operação de login cancelada.");
                 realizarLogin(academia);
                 return;
             }
-    
+
             String senha = JOptionPane.showInputDialog("Digite a senha do cliente:");
-    
+
             for (Pessoa pessoa : academia.getPessoas()) {
                 if (pessoa instanceof Cliente && pessoa.getLogin().equals(login) && pessoa.getSenha().equals(senha)) {
                     exibirMensagem("Login de cliente bem-sucedido.");
@@ -277,7 +280,7 @@ public class SistemaAcademiaGUI {
                     return;
                 }
             }
-    
+
             exibirMensagem("Login de cliente falhou. Tente novamente.");
         }
     }
@@ -418,7 +421,7 @@ public class SistemaAcademiaGUI {
         }
     }
 
-     // Métodos para criar, visualizar e adicionar exercícios em fichas
+    // Métodos para criar, visualizar e adicionar exercícios em fichas
     private static void criarFicha(Academia academia) {
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
@@ -505,50 +508,50 @@ public class SistemaAcademiaGUI {
     }
 
     private static void visualizarFicha(Academia academia, Cliente clienteLogado) {
-    if (academia.getFichas().isEmpty()) {
-        exibirMensagemErro("Não há fichas de academia criadas no sistema.");
-    } else {
-        String[] nomesClientes = new String[academia.getFichas().size()];
-        for (int i = 0; i < academia.getFichas().size(); i++) {
-            nomesClientes[i] = academia.getFichas().get(i).getNomeCliente();
-        }
+        if (academia.getFichas().isEmpty()) {
+            exibirMensagemErro("Não há fichas de academia criadas no sistema.");
+        } else {
+            String[] nomesClientes = new String[academia.getFichas().size()];
+            for (int i = 0; i < academia.getFichas().size(); i++) {
+                nomesClientes[i] = academia.getFichas().get(i).getNomeCliente();
+            }
 
-        if (clienteLogado != null) {
-            String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
-                    "Selecione um cliente para visualizar a ficha:",
-                    "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null, nomesClientes,
-                    nomesClientes[0]);
+            if (clienteLogado != null) {
+                String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
+                        "Selecione um cliente para visualizar a ficha:",
+                        "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null, nomesClientes,
+                        nomesClientes[0]);
 
-            if (nomeClienteSelecionado != null) {
-                // Verifica se a ficha pertence ao cliente logado
-                if (!nomeClienteSelecionado.equals(clienteLogado.getNome())) {
-                    exibirMensagemErro("Você não tem permissão para visualizar a ficha de outro cliente.");
-                    return;
-                }
-
-                for (FichaAcademia ficha : academia.getFichas()) {
-                    if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
-                        StringBuilder fichaTexto = new StringBuilder(
-                                "Ficha de " + nomeClienteSelecionado + ":\n");
-
-                        for (int i = 0; i < ficha.getExercicios().size(); i++) {
-                            fichaTexto.append("Exercício: ").append(ficha.getExercicios().get(i))
-                                    .append(", Séries: ").append(ficha.getSeries().get(i))
-                                    .append(", Repetições: ").append(ficha.getRepeticoes().get(i))
-                                    .append("\n");
-                        }
-
-                        exibirMensagem(fichaTexto.toString());
+                if (nomeClienteSelecionado != null) {
+                    // Verifica se a ficha pertence ao cliente logado
+                    if (!nomeClienteSelecionado.equals(clienteLogado.getNome())) {
+                        exibirMensagemErro("Você não tem permissão para visualizar a ficha de outro cliente.");
                         return;
                     }
+
+                    for (FichaAcademia ficha : academia.getFichas()) {
+                        if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
+                            StringBuilder fichaTexto = new StringBuilder(
+                                    "Ficha de " + nomeClienteSelecionado + ":\n");
+
+                            for (int i = 0; i < ficha.getExercicios().size(); i++) {
+                                fichaTexto.append("Exercício: ").append(ficha.getExercicios().get(i))
+                                        .append(", Séries: ").append(ficha.getSeries().get(i))
+                                        .append(", Repetições: ").append(ficha.getRepeticoes().get(i))
+                                        .append("\n");
+                            }
+
+                            exibirMensagem(fichaTexto.toString());
+                            return;
+                        }
+                    }
                 }
+            } else {
+                // Caso não haja cliente logado, encerra a visualização
+                exibirMensagemErro("Nenhum cliente logado. Realize o login como cliente para acessar sua ficha.");
             }
-        } else {
-            // Caso não haja cliente logado, encerra a visualização
-            exibirMensagemErro("Nenhum cliente logado. Realize o login como cliente para acessar sua ficha.");
         }
     }
-}
 
     private static void adicionarExercicio(Academia academia) {
         if (academia.getPessoas().isEmpty()) {
@@ -596,17 +599,31 @@ public class SistemaAcademiaGUI {
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
         } else {
-             // Constrói uma mensagem com as pessoas cadastradas
+            // Constrói uma mensagem com as pessoas cadastradas
             StringBuilder pessoasCadastradas = new StringBuilder("Pessoas cadastradas na academia:\n");
             for (Pessoa pessoa : academia.getPessoas()) {
                 pessoasCadastradas.append(pessoa).append("\n");
             }
-             // Exibe a mensagem com as pessoas cadastradas
+            // Exibe a mensagem com as pessoas cadastradas
             exibirMensagem(pessoasCadastradas.toString());
         }
     }
 
-      // Método para exibir opções em uma caixa de diálogo
+    private static void realizarPagamento() {
+        try {
+            // Carrega a imagem do QR Code a partir de um arquivo
+            ImageIcon qrcodeIcon = new ImageIcon("imagens/qrcode.png");
+
+            // Exibe a imagem no JOptionPane
+            JOptionPane.showMessageDialog(null, qrcodeIcon, "Pagamento", JOptionPane.PLAIN_MESSAGE);
+
+            exibirMensagem("Pagamento realizado com sucesso!");
+        } catch (Exception e) {
+            exibirMensagemErro("Ocorreu um erro ao exibir o QR Code de pagamento: " + e.getMessage());
+        }
+    }
+
+    // Método para exibir opções em uma caixa de diálogo
     private static int exibirOpcoes(String mensagem, String titulo, String[] opcoes) {
         return JOptionPane.showOptionDialog(
                 null,
@@ -619,7 +636,7 @@ public class SistemaAcademiaGUI {
                 opcoes[0]);
     }
 
-     // Métodos auxiliares para exibir mensagens
+    // Métodos auxiliares para exibir mensagens
     private static void exibirMensagem(String mensagem) {
         JOptionPane.showMessageDialog(null, mensagem);
     }

@@ -1,14 +1,14 @@
 // Classe base que representa uma pessoa genérica
 public class Pessoa {
     // Atributos que armazenam informações pessoais
-    private String nome;            // Nome da pessoa
-    private String dataNascimento;  // Data de nascimento da pessoa
-    private String endereco;        // Endereço da pessoa
-    private String cep;             // Código de Endereçamento Postal (CEP)
-    private String email;           // Endereço de e-mail da pessoa
-    private String telefone;        // Número de telefone da pessoa
-    private String login;           // Nome de usuário para login
-    private String senha;           // Senha para autenticação
+    private String nome; // Nome da pessoa
+    private String dataNascimento; // Data de nascimento da pessoa
+    private String endereco; // Endereço da pessoa
+    private String cep; // Código de Endereçamento Postal (CEP)
+    private String email; // Endereço de e-mail da pessoa
+    private String telefone; // Número de telefone da pessoa
+    private String login; // Nome de usuário para login
+    private String senha; // Senha para autenticação
 
     // Construtor que inicializa os atributos da classe
     public Pessoa(String nome, String dataNascimento, String endereco, String cep,

@@ -2,20 +2,21 @@
 public class Cliente extends Pessoa {
     // Número de identificação do cliente
     private int numeroID;
-    
+
     // Situação do cliente (ex: ativo, inativo, suspenso)
     private String situacao;
-    
+
     // Restrições médicas do cliente
     private String restricoesMedicas;
-    
+
     // Alteração solicitada pelo cliente
     private String alteracaoSolicitada;
 
-    // Construtor que inicializa os atributos da classe e chama o construtor da classe pai (Pessoa)
+    // Construtor que inicializa os atributos da classe e chama o construtor da
+    // classe pai (Pessoa)
     public Cliente(String nome, String dataNascimento, String endereco, String cep,
-                   String email, String telefone, String login, String senha,
-                   int numeroID, String situacao, String restricoesMedicas, String alteracaoSolicitada) {
+            String email, String telefone, String login, String senha,
+            int numeroID, String situacao, String restricoesMedicas, String alteracaoSolicitada) {
         super(nome, dataNascimento, endereco, cep, email, telefone, login, senha);
         this.numeroID = numeroID;
         this.situacao = situacao;
