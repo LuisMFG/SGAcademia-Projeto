@@ -1,4 +1,4 @@
-# Gerenciador de Academia
+# Gerenciador de Academia - Energy Academia
 
 ## 💻 Projeto
 Este projeto consiste na implementação de um sistema simples de Gerenciador de Academia, desenvolvido como parte das disciplinas de POO (Programação Orientada a Objetos), AOO (Análise e Projeto Orientado a Objetos) e BD (Banco de Dados).
