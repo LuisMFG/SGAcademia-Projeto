@@ -65,4 +65,8 @@ public class Academia {
         return fichas;
     }
 
+    public void removerFicha(FichaAcademia ficha) {
+        fichas.remove(ficha);
+    }
+
 }

@@ -437,6 +437,30 @@ public class SistemaAcademiaGUI {
                     nomesClientes[0]);
 
             if (nomeClienteSelecionado != null) {
+                // Procura a ficha existente para o cliente
+                FichaAcademia fichaExistente = null;
+                for (FichaAcademia ficha : academia.getFichas()) {
+                    if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
+                        fichaExistente = ficha;
+                        break;
+                    }
+                }
+
+                // Se existe uma ficha, pergunta ao usuário se deseja substituir
+                if (fichaExistente != null) {
+                    int opcaoSubstituir = JOptionPane.showConfirmDialog(null,
+                            "Já existe uma ficha para este cliente. Deseja substituir?",
+                            "Substituir Ficha", JOptionPane.YES_NO_OPTION);
+
+                    if (opcaoSubstituir == JOptionPane.YES_OPTION) {
+                        // Remove a ficha existente antes de criar a nova
+                        academia.removerFicha(fichaExistente);
+                    } else {
+                        // Se o usuário não quiser substituir, encerra o método
+                        return;
+                    }
+                }
+
                 FichaAcademia ficha = new FichaAcademia(nomeClienteSelecionado);
                 boolean criandoFicha = true;
 
