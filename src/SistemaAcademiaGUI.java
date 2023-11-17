@@ -37,7 +37,7 @@ public class SistemaAcademiaGUI {
                     "Sair"
             };
 
-            int escolha = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoes);
+            int escolha = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoes);
 
             try {
                 if (escolha >= 0 && escolha < opcoes.length) {
@@ -92,7 +92,7 @@ public class SistemaAcademiaGUI {
                     "Sair"
             };
 
-            int escolhaInstrutor = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesInstrutor);
+            int escolhaInstrutor = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoesInstrutor);
 
             try {
                 if (escolhaInstrutor >= 0 && escolhaInstrutor < opcoesInstrutor.length) {
@@ -134,7 +134,7 @@ public class SistemaAcademiaGUI {
                     "Visualizar Sua Ficha", "Realizar Pagamento", "Voltar pro Login", "Sair"
             };
 
-            int escolhaCliente = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesCliente);
+            int escolhaCliente = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoesCliente);
 
             try {
                 if (escolhaCliente >= 0 && escolhaCliente < opcoesCliente.length) {
@@ -174,7 +174,7 @@ public class SistemaAcademiaGUI {
                     "Sair"
             };
 
-            int escolhaTreinador = exibirOpcoes("Escolha uma opção:", "Sistema de Academia", opcoesTreinador);
+            int escolhaTreinador = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoesTreinador);
 
             try {
                 if (escolhaTreinador >= 0 && escolhaTreinador < opcoesTreinador.length) {
@@ -212,7 +212,7 @@ public class SistemaAcademiaGUI {
 
     private static void realizarLogin(Academia academia) {
         String[] opcoesLogin = { "Login Funcionário", "Login Cliente", "Login Treinador", "Login Instrutor", "Sair" };
-        int escolhaLogin = exibirOpcoes("Escolha uma opção de login:", "Login", opcoesLogin);
+        int escolhaLogin = exibirOpcoes("Escolha uma opção de login:", "Energy Academia", opcoesLogin);
 
         switch (escolhaLogin) {
             case 0:
@@ -631,7 +631,7 @@ public class SistemaAcademiaGUI {
                 titulo,
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null,
+                new ImageIcon("imagens/halter pixel art.png"),
                 opcoes,
                 opcoes[0]);
     }

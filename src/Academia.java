@@ -65,9 +65,4 @@ public class Academia {
         return fichas;
     }
 
-    // Método de espaço reservado (placeholder) que deve ser implementado para
-    // retornar os nomes dos clientes
-    public String[] getNomesClientes() {
-        return null;
-    }
 }
