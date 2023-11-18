@@ -17,9 +17,9 @@ Java + Swing
 
 ## Funcionalidades
 - Login de Funcionário: Permite que um funcionário faça login no sistema.
-- Cadastro de Clientes, Treinadores e Instrutores: Possibilita o cadastro de diferentes tipos de usuários na academia.
+- Cadastro de Clientes e Instrutores: Possibilita o cadastro de diferentes tipos de usuários na academia.
 - Criação de Fichas de Academia: Permite a criação de fichas de treino para os clientes.
-- Visualização de Fichas de Academia: Permite visualizar as fichas de treino, tanto para clientes quanto para instrutores e treinadores.
+- Visualização de Fichas de Academia: Permite visualizar as fichas de treino dos clientes.
 - Adição de Exercícios em Fichas: Permite adicionar exercícios a fichas de treino existentes.
 - Listagem de Pessoas Cadastradas: Exibe uma lista com todas as pessoas cadastradas na academia.
 - Mais funcionalidades por vir.
