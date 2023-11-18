@@ -35,8 +35,8 @@ public class SistemaAcademiaGUI {
     private static void exibirMenu(Academia academia) {
         while (true) {
             String[] opcoes = {
-                    "Cadastrar Cliente", "Cadastrar Treinador", "Cadastrar Instrutor",
-                    "Criar Ficha", "Visualizar Ficha", "Adicionar Exercício", "Listar Pessoas", "Voltar pro Login",
+                    "Cadastrar Cliente", "Cadastrar Instrutor",
+                    "Listar Pessoas", "Voltar pro Login",
                     "Sair"
             };
 
@@ -62,27 +62,15 @@ public class SistemaAcademiaGUI {
                 cadastrarCliente(academia);
                 break;
             case 1:
-                cadastrarTreinador(academia);
-                break;
-            case 2:
                 cadastrarInstrutor(academia);
                 break;
-            case 3:
-                criarFicha(academia);
-                break;
-            case 4:
-                visualizarTodasAsFichas(academia);
-                break;
-            case 5:
-                adicionarExercicio(academia);
-                break;
-            case 6:
+            case 2:
                 listarPessoas(academia);
                 break;
-            case 7:
+            case 3:
                 realizarLogin(academia);
                 break;
-            case 8:
+            case 4:
                 exibirMensagem("Saindo do programa.");
                 System.exit(0);
         }
@@ -170,51 +158,8 @@ public class SistemaAcademiaGUI {
         }
     }
 
-    private static void exibirMenuTreinador(Academia academia) {
-        while (true) {
-            String[] opcoesTreinador = {
-                    "Criar Ficha", "Visualizar Ficha", "Adicionar Exercício", "Voltar pro Login",
-                    "Sair"
-            };
-
-            int escolhaTreinador = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoesTreinador);
-
-            try {
-                if (escolhaTreinador >= 0 && escolhaTreinador < opcoesTreinador.length) {
-                    processarEscolhaTreinador(academia, escolhaTreinador);
-                } else {
-                    exibirMensagemErro("Opção inválida. Tente novamente.");
-                }
-            } catch (NumberFormatException e) {
-                exibirMensagemErro("Erro: Insira um número válido.");
-            } catch (Exception e) {
-                exibirMensagemErro("Ocorreu um erro inesperado: " + e.getMessage());
-            }
-        }
-    }
-
-    private static void processarEscolhaTreinador(Academia academia, int escolhaTreinador) {
-        switch (escolhaTreinador) {
-            case 0:
-                criarFicha(academia);
-                break;
-            case 1:
-                visualizarFicha(academia, clienteLogado);
-                break;
-            case 2:
-                adicionarExercicio(academia);
-                break;
-            case 3:
-                realizarLogin(academia);
-                break;
-            case 4:
-                exibirMensagem("Saindo do programa.");
-                System.exit(0);
-        }
-    }
-
     private static void realizarLogin(Academia academia) {
-        String[] opcoesLogin = { "Login Funcionário", "Login Cliente", "Login Treinador", "Login Instrutor", "Sair" };
+        String[] opcoesLogin = { "Login Funcionário", "Login Cliente", "Login Instrutor", "Sair" };
         int escolhaLogin = exibirOpcoes("Escolha uma opção de login:", "Energy Academia", opcoesLogin);
 
         switch (escolhaLogin) {
@@ -225,9 +170,6 @@ public class SistemaAcademiaGUI {
                 realizarLoginCliente(academia);
                 break;
             case 2:
-                realizarLoginTreinador(academia);
-                break;
-            case 3:
                 realizarLoginInstrutor(academia);
                 break;
             case 4:
@@ -262,7 +204,7 @@ public class SistemaAcademiaGUI {
         }
     }
 
-    // Métodos para realizar o login de cliente, treinador e instrutor
+    // Métodos para realizar o login de cliente e instrutor
     private static void realizarLoginCliente(Academia academia) {
         while (true) {
             String login = JOptionPane.showInputDialog("Digite o login do cliente:");
@@ -286,37 +228,6 @@ public class SistemaAcademiaGUI {
             }
 
             exibirMensagem("Login de cliente falhou. Tente novamente.");
-        }
-    }
-
-    private static void realizarLoginTreinador(Academia academia) {
-        while (true) {
-            String login = JOptionPane.showInputDialog("Digite o login do treinador:");
-
-            // Tratamento para Cancelar ou fechar a janela
-            if (login == null) {
-                exibirMensagem("Operação de login cancelada.");
-                // Retorna à tela de opção de login
-                realizarLogin(academia);
-                return;
-            }
-
-            String senha = JOptionPane.showInputDialog("Digite a senha do treinador:");
-
-            // Busca eficiente no conjunto de pessoas
-            for (Pessoa pessoa : academia.getPessoas()) {
-                if (pessoa instanceof Treinador && pessoa.getLogin().equals(login) && pessoa.getSenha().equals(senha)) {
-                    exibirMensagem("Login de treinador bem-sucedido.");
-                    funcionarioLogado = true;
-
-                    // Retorna à tela de opção de login após o login bem-sucedido
-                    exibirMenuTreinador(academia);
-                    return;
-                }
-            }
-
-            // Mensagem de erro se o login falhar
-            exibirMensagem("Login de treinador falhou. Tente novamente.");
         }
     }
 
@@ -352,7 +263,7 @@ public class SistemaAcademiaGUI {
         }
     }
 
-    // Métodos para cadastrar cliente, treinador e instrutor
+    // Métodos para cadastrar cliente e instrutor
     private static void cadastrarCliente(Academia academia) {
         String nome = JOptionPane.showInputDialog("Digite o nome do cliente:");
         if (nome != null && !nome.isEmpty()) {
@@ -370,28 +281,6 @@ public class SistemaAcademiaGUI {
             exibirMensagem("Cliente adicionado com sucesso. ID: " + cliente.getId());
         } else {
             exibirMensagemErro("Nome do cliente inválido.");
-        }
-    }
-
-    private static void cadastrarTreinador(Academia academia) {
-        String nome = JOptionPane.showInputDialog("Digite o nome do treinador:");
-        if (nome != null && !nome.isEmpty()) {
-            String dataNascimento = JOptionPane.showInputDialog("Digite a data de nascimento do treinador:");
-            String endereco = JOptionPane.showInputDialog("Digite o endereço do treinador:");
-            String cep = JOptionPane.showInputDialog("Digite o CEP do treinador:");
-            String email = JOptionPane.showInputDialog("Digite o email do treinador:");
-            String telefone = JOptionPane.showInputDialog("Digite o telefone do treinador:");
-            String login = JOptionPane.showInputDialog("Digite o login do treinador:");
-            String senha = JOptionPane.showInputDialog("Digite a senha do treinador:");
-            double taxaMensalAcademia = Double
-                    .parseDouble(JOptionPane.showInputDialog("Digite a taxa mensal do treinador:"));
-
-            Treinador treinador = new Treinador(nome, dataNascimento, endereco, cep, email, telefone,
-                    login, senha, taxaMensalAcademia);
-            academia.adicionarPessoa(treinador);
-            exibirMensagem("Treinador adicionado com sucesso. ID: " + treinador.getId());
-        } else {
-            exibirMensagemErro("Nome do treinador inválido.");
         }
     }
 

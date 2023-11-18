@@ -3,7 +3,7 @@ import java.util.List;
 
 // Classe que representa a entidade da academia, contendo informações sobre pessoas e fichas de academia
 public class Academia {
-    // Lista de pessoas cadastradas na academia (clientes, treinadores, instrutores
+    // Lista de pessoas cadastradas na academia (clientes, instrutores
     // e funcionários)
     private List<Pessoa> pessoas;
 
