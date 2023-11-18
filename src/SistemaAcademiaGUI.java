@@ -1,5 +1,8 @@
 
 // Importa a classe Swing necessária para criar a interface gráfica
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.swing.*;
 
 // Classe principal que representa a interface gráfica do sistema da academia
@@ -426,15 +429,22 @@ public class SistemaAcademiaGUI {
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
         } else {
-            String[] nomesClientes = new String[academia.getPessoas().size()];
-            for (int i = 0; i < academia.getPessoas().size(); i++) {
-                nomesClientes[i] = academia.getPessoas().get(i).getNome();
+            // Filtra apenas os clientes da lista de pessoas
+            List<String> nomesClientes = academia.getPessoas().stream()
+                    .filter(pessoa -> pessoa instanceof Cliente)
+                    .map(Pessoa::getNome)
+                    .collect(Collectors.toList());
+
+            if (nomesClientes.isEmpty()) {
+                exibirMensagemErro("Não há clientes cadastrados no sistema.");
+                return;
             }
 
             String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
                     "Selecione um cliente:",
-                    "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null, nomesClientes,
-                    nomesClientes[0]);
+                    "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null,
+                    nomesClientes.toArray(new String[0]),
+                    nomesClientes.get(0));
 
             if (nomeClienteSelecionado != null) {
                 // Procura a ficha existente para o cliente
