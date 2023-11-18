@@ -172,7 +172,7 @@ public class SistemaAcademiaGUI {
             case 2:
                 realizarLoginInstrutor(academia);
                 break;
-            case 4:
+            case 3:
                 exibirMensagem("Saindo do programa.");
                 System.exit(0);
         }
