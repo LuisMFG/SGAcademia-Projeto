@@ -30,26 +30,6 @@ public class Academia {
         fichas.add(ficha);
     }
 
-    // Método para realizar o login de um funcionário na academia
-    public boolean loginFuncionario(String login, String senha) {
-        // Itera sobre a lista de pessoas para encontrar um funcionário com as
-        // credenciais fornecidas
-        for (Pessoa pessoa : pessoas) {
-            if (pessoa instanceof Funcionario) {
-                Funcionario funcionario = (Funcionario) pessoa;
-                // Verifica se as credenciais correspondem a um funcionário
-                if (funcionario.getLogin().equals(login) && funcionario.getSenha().equals(senha)) {
-                    // Define o funcionário logado
-                    funcionarioLogado = funcionario;
-                    // Retorna verdadeiro indicando login bem-sucedido
-                    return true;
-                }
-            }
-        }
-        // Retorna falso se não encontrar um funcionário com as credenciais fornecidas
-        return false;
-    }
-
     // Método para obter a referência do funcionário atualmente logado
     public Pessoa getFuncionarioLogado() {
         return funcionarioLogado;
