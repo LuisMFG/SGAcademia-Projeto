@@ -1,18 +1,18 @@
 
-// Importa a classe Swing necessária para criar a interface gráfica
+// Importa as bibliotecas, list, stream e swing.
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.*;
 
-// Classe principal que representa a interface gráfica do sistema da academia
+// Classe principal que representa o sistema da academia e sua interface grafica
 public class SistemaAcademiaGUI {
     // Constantes para login padrão do funcionário
     private static final String LOGIN_FUNCIONARIO_PADRAO = "Admin";
     private static final String SENHA_FUNCIONARIO_PADRAO = "Admin";
 
-    // Variáveis de controle de login
-    private static boolean funcionarioLogado = false;
+    // Variáveis de controle
+    private static boolean Logado = false;
     private static Cliente clienteLogado = null;
 
     // Método principal que inicia o programa
@@ -20,8 +20,8 @@ public class SistemaAcademiaGUI {
         // Instância da classe que representa a academia
         Academia academia = new Academia();
 
-        // Loop de login do funcionário
-        while (!funcionarioLogado) {
+        // Loop de login
+        while (!Logado) {
             realizarLogin(academia);
 
         }
@@ -31,18 +31,23 @@ public class SistemaAcademiaGUI {
 
     }
 
-    // Métodos para exibir diferentes menus e processar escolhas
+    // Métodos para exibir o menu do Funcionario (Admin, Admin)
     private static void exibirMenu(Academia academia) {
         while (true) {
-            String[] opcoes = {
+            String[] opcoes = { // Array de strings para armazenar as opcoes do Funcionario
                     "Cadastrar Cliente", "Cadastrar Instrutor",
                     "Listar Pessoas", "Voltar pro Login",
                     "Sair"
             };
 
+            // Exibe as opções e obtém a escolha do usuário atraves de um ShowOptionDialog
+            // do JOPTIONPANE.
             int escolha = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoes);
 
-            try {
+            try { // Tratamento de excecao.
+
+                // Processa a escolha do usuário
+                // Se a escolha estiver entre 0 ou o tamanho da Array de Strings
                 if (escolha >= 0 && escolha < opcoes.length) {
                     processarEscolha(academia, escolha);
                 } else {
@@ -56,36 +61,42 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Metodo para processar a escolha da pessoa Funcionario
     private static void processarEscolha(Academia academia, int escolha) {
-        switch (escolha) {
-            case 0:
-                cadastrarCliente(academia);
+        switch (escolha) { // Estrutura switch para processar a escolha atraves do numero digitado
+            case 0: // No nosso caso o numero digitado esta sendo substituido por botoes do Swing.
+                cadastrarCliente(academia); // Chama o metodo cadastrarCliente
                 break;
             case 1:
-                cadastrarInstrutor(academia);
+                cadastrarInstrutor(academia); // Chama o metodo cadastrarInstrutor
                 break;
             case 2:
-                listarPessoas(academia);
+                listarPessoas(academia); // Chama o metodo listarPessoas
                 break;
             case 3:
-                realizarLogin(academia);
+                realizarLogin(academia); // Chama o metodo realizarLogin
                 break;
             case 4:
-                exibirMensagem("Saindo do programa.");
+                exibirMensagem("Saindo do programa."); // Encerra o programa (Sair)
                 System.exit(0);
         }
     }
 
+    // Metodo para exibir o menu da pessoa instrutor
     private static void exibirMenuInstrutor(Academia academia) {
         while (true) {
-            String[] opcoesInstrutor = {
+            String[] opcoesInstrutor = { // Array de strings para armazenar as opcoes do menu do instrutor
                     "Criar Ficha", "Visualizar Ficha", "Adicionar Exercício", "Voltar pro Login",
                     "Sair"
             };
 
+            // Exibe as opções e obtém a escolha do Instrutor atraves de um ShowOptionDialog
+            // do JOPTIONPANE. (exibirOpcoes)
             int escolhaInstrutor = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoesInstrutor);
 
             try {
+                // Processa a escolha da Pessoa Instrutuor
+                // Se a escolha estiver entre 0 ou o tamanho da Array de Strings
                 if (escolhaInstrutor >= 0 && escolhaInstrutor < opcoesInstrutor.length) {
                     processarEscolhaInstrutor(academia, escolhaInstrutor);
                 } else {
@@ -99,35 +110,40 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Metodo para processar a escolha da pessoa Instrutor
     private static void processarEscolhaInstrutor(Academia academia, int escolhaInstrutor) {
-        switch (escolhaInstrutor) {
+        switch (escolhaInstrutor) { // Estrutura switch para processar a escolha atraves do numero digitado
             case 0:
-                criarFicha(academia);
+                criarFicha(academia); // Chama o metodo criar ficha
                 break;
             case 1:
-                visualizarTodasAsFichas(academia);
-                break;
+                visualizarTodasAsFichas(academia); // Chama o metodo visualizarTodasAsFichas
+                break; // (Particularidade do Instrutor.)
             case 2:
-                adicionarExercicio(academia);
-                break;
+                adicionarExercicio(academia); // Chama o metodo adicionarExercicio
+                break; // (Particularidade do Instrutor)
             case 3:
-                realizarLogin(academia);
+                realizarLogin(academia); // Chama o metodo realizarLogin
                 break;
             case 4:
-                exibirMensagem("Saindo do programa.");
+                exibirMensagem("Saindo do programa."); // Encerra a execucao
                 System.exit(0);
         }
     }
 
+    // Metodo para exibir o menu da pessoa Cliente
     private static void exibirMenuCliente(Academia academia) {
         while (true) {
-            String[] opcoesCliente = {
+            String[] opcoesCliente = { // Array de strings para armazenar as opcoes do cliente.
                     "Visualizar Sua Ficha", "Realizar Pagamento", "Voltar pro Login", "Sair"
             };
-
+            // Exibe as opções e obtém a escolha do Cliente atraves de um ShowOptionDialog
+            // do JOPTIONPANE. (exibirOpcoes)
             int escolhaCliente = exibirOpcoes("Escolha uma opção:", "Energy Academia", opcoesCliente);
 
             try {
+                // Processa a escolha da Pessoa Instrutuor
+                // Se a escolha estiver entre 0 ou o tamanho da Array de Strings
                 if (escolhaCliente >= 0 && escolhaCliente < opcoesCliente.length) {
                     processarEscolhaCliente(academia, escolhaCliente);
                 } else {
@@ -141,39 +157,46 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Metodo para processar a escolha do Cliente
     private static void processarEscolhaCliente(Academia academia, int escolhaCliente) {
-        switch (escolhaCliente) {
+        switch (escolhaCliente) { // Estrutura switch para processar a escolha atraves do numero digitado
             case 0:
-                visualizarFicha(academia, clienteLogado);
-                break;
+                visualizarFicha(academia, clienteLogado); // Chama o metodo para o cliente logado no momento
+                break; // visualizar apenas a sua ficha
             case 1:
-                realizarPagamento();
+                realizarPagamento(); // Chama o metodo para realizarPagamento (Simulacao).
                 break;
             case 2:
-                realizarLogin(academia);
+                realizarLogin(academia); // Chama o metodo realizarLogin.
                 break;
             case 3:
-                exibirMensagem("Saindo do programa.");
+                exibirMensagem("Saindo do programa."); // Encerra o programa.
                 System.exit(0);
         }
     }
 
+    // Metodo que exibe o menu com os tipos de login para cada Pessoa
     private static void realizarLogin(Academia academia) {
+        // Array de Strings que armazena as opcoes de Login.
         String[] opcoesLogin = { "Login Funcionário", "Login Cliente", "Login Instrutor", "Sair" };
+
+        // Exibe as opções e obtém a escolha pertinente a Pessoa do momento atraves de
+        // um ShowOptionDialog
+        // do JOPTIONPANE. (exibirOpcoes)
         int escolhaLogin = exibirOpcoes("Escolha uma opção de login:", "Energy Academia", opcoesLogin);
 
-        switch (escolhaLogin) {
+        switch (escolhaLogin) { // Estrutura switch
             case 0:
-                realizarLoginFuncionario(academia);
+                realizarLoginFuncionario(academia); // chama o metodo de login do funcionario
                 break;
             case 1:
-                realizarLoginCliente(academia);
+                realizarLoginCliente(academia); // chama o metodo de login do cliente
                 break;
             case 2:
-                realizarLoginInstrutor(academia);
+                realizarLoginInstrutor(academia); // chama o metodo de login do instrutor
                 break;
             case 3:
-                exibirMensagem("Saindo do programa.");
+                exibirMensagem("Saindo do programa."); // encerra o programa.
                 System.exit(0);
         }
     }
@@ -188,7 +211,7 @@ public class SistemaAcademiaGUI {
             // Verifica se o login e a senha correspondem ao padrão
             if (LOGIN_FUNCIONARIO_PADRAO.equals(login) && SENHA_FUNCIONARIO_PADRAO.equals(senha)) {
                 exibirMensagem("Login de funcionário bem-sucedido.");
-                funcionarioLogado = true;
+                Logado = true;
                 exibirMenu(academia);
                 return;
             } else {
@@ -204,52 +227,69 @@ public class SistemaAcademiaGUI {
         }
     }
 
-    // Métodos para realizar o login de cliente e instrutor
+    // Método para realizar o login da pessoa Cliente
     private static void realizarLoginCliente(Academia academia) {
+        // Loop de login do cliente
         while (true) {
+            // Solicita o login do cliente por meio de uma caixa de diálogo
             String login = JOptionPane.showInputDialog("Digite o login do cliente:");
 
+            // Verifica se o cliente cancelou a operação
             if (login == null) {
                 exibirMensagem("Operação de login cancelada.");
-                realizarLogin(academia);
+                // Retorna à tela de opção de login após o login mal sucedido
+                realizarLogin(academia); // Volta pra tela de login
                 return;
             }
 
+            // Solicita a senha do cliente por meio de uma caixa de diálogo
             String senha = JOptionPane.showInputDialog("Digite a senha do cliente:");
 
+            // Percorrendo todas as pessoas associadas à academia,
+            // e em cada iteração do loop, a variável pessoa representa uma pessoa
+            // específica na coleção.
+            // para encontrar o cliente correspondente ao login e senha
             for (Pessoa pessoa : academia.getPessoas()) {
+                // Verifica se a pessoa é do tipo Cliente e se as credenciais são corretas
                 if (pessoa instanceof Cliente && pessoa.getLogin().equals(login) && pessoa.getSenha().equals(senha)) {
-                    exibirMensagem("Login de cliente bem-sucedido.");
+                    exibirMensagem("Login de cliente bem-sucedido."); // Exibe a mensagem de sucesso
+                    // Define o cliente logado
                     clienteLogado = (Cliente) pessoa;
-                    funcionarioLogado = true;
+                    // Exibe o menu do cliente
                     exibirMenuCliente(academia);
                     return;
                 }
             }
-
+            // Falha no login
             exibirMensagem("Login de cliente falhou. Tente novamente.");
         }
     }
 
+    // Metodo para realizar o login da pessoa Instrutor
     private static void realizarLoginInstrutor(Academia academia) {
+        // Loop de login do cliente
         while (true) {
+            // Solicita o login do cliente por meio de uma caixa de diálogo
             String login = JOptionPane.showInputDialog("Digite o login do instrutor:");
 
-            // Tratamento para Cancelar ou fechar a janela
+            // Verifica se o instrutor cancelou a operação
             if (login == null) {
                 exibirMensagem("Operação de login cancelada.");
-                // Retorna à tela de opção de login
+                // Retorna à tela de opção de login após o login mal sucedido
                 realizarLogin(academia);
                 return;
             }
 
             String senha = JOptionPane.showInputDialog("Digite a senha do instrutor:");
 
-            // Busca eficiente no conjunto de pessoas
+            // Percorre todas as pessoas associadas à academia,
+            // e em cada iteração do loop, a variável pessoa representa uma pessoa
+            // específica na coleção <lista>.
+            // para encontrar o cliente correspondente ao login e senha
             for (Pessoa pessoa : academia.getPessoas()) {
+                // Verifica se a pessoa é do tipo Instrutor e se as credenciais são corretas
                 if (pessoa instanceof Instrutor && pessoa.getLogin().equals(login) && pessoa.getSenha().equals(senha)) {
                     exibirMensagem("Login de instrutor bem-sucedido.");
-                    funcionarioLogado = true;
 
                     // Retorna à tela de opção de login após o login bem-sucedido
                     exibirMenuInstrutor(academia);
@@ -263,10 +303,12 @@ public class SistemaAcademiaGUI {
         }
     }
 
-    // Métodos para cadastrar cliente e instrutor
+    // Métodos para cadastrar cliente
     private static void cadastrarCliente(Academia academia) {
+        // Solicita o nome do cliente
         String nome = JOptionPane.showInputDialog("Digite o nome do cliente:");
-        if (nome != null && !nome.isEmpty()) {
+        if (nome != null && !nome.isEmpty()) { // Verifica se o nome nao esta vazio
+            // Prossegue com o resto do cadastro
             String dataNascimento = JOptionPane.showInputDialog("Digite a data de nascimento do cliente:");
             String endereco = JOptionPane.showInputDialog("Digite o endereço do cliente:");
             String cep = JOptionPane.showInputDialog("Digite o CEP do cliente:");
@@ -275,8 +317,10 @@ public class SistemaAcademiaGUI {
             String login = JOptionPane.showInputDialog("Digite o login do cliente:");
             String senha = JOptionPane.showInputDialog("Digite a senha do cliente:");
 
+            // Cria um objeto cliente com as informacoes fornecidas
             Cliente cliente = new Cliente(nome, dataNascimento, endereco, cep, email, telefone,
                     login, senha);
+            // Adiciona esse cliente a lista de pessoas da academia
             academia.adicionarPessoa(cliente);
             exibirMensagem("Cliente adicionado com sucesso. ID: " + cliente.getId());
         } else {
@@ -284,9 +328,12 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Metodo para realizar o cadastro do Instrutor
     private static void cadastrarInstrutor(Academia academia) {
+        // Solicita o nome do cliente
         String nome = JOptionPane.showInputDialog("Digite o nome do instrutor:");
-        if (nome != null && !nome.isEmpty()) {
+        if (nome != null && !nome.isEmpty()) { // Verifica se o nome nao esta vazio
+            // Prossegue com o resto do cadastro
             String dataNascimento = JOptionPane.showInputDialog("Digite a data de nascimento do instrutor:");
             String endereco = JOptionPane.showInputDialog("Digite o endereço do instrutor:");
             String cep = JOptionPane.showInputDialog("Digite o CEP do instrutor:");
@@ -302,10 +349,11 @@ public class SistemaAcademiaGUI {
             String atendimentoDiasSemana = JOptionPane.showInputDialog("Digite os dias de atendimento do instrutor:");
             String atendimentoPeriodo = JOptionPane.showInputDialog("Digite o período de atendimento do instrutor:");
 
+            // Cria o objeto instrutor com as informacoes fornecidas
             Instrutor instrutor = new Instrutor(nome, dataNascimento, endereco, cep, email, telefone, login,
                     senha, dataAdmissao, dataDemissao, remuneracao, dataRemuneracao, expediente,
                     atendimentoDiasSemana, atendimentoPeriodo);
-
+            // Adiciona esse Istrutor cadastrado a lista de pessoas da academia
             academia.adicionarPessoa(instrutor);
             exibirMensagem("Instrutor adicionado com sucesso.");
         } else {
@@ -313,30 +361,35 @@ public class SistemaAcademiaGUI {
         }
     }
 
-    // Métodos para criar, visualizar e adicionar exercícios em fichas
+    // Métodos para criar uma ficha para um cliente
     private static void criarFicha(Academia academia) {
+        // Verifica se nao ha usuarios cadastrados no sistema
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
         } else {
-            // Filtra apenas os clientes da lista de pessoas
+            // Filtra apenas os clientes da lista de pessoas e obtem seus nomes e atribue a
+            // lista nomesClientes
             List<String> nomesClientes = academia.getPessoas().stream()
                     .filter(pessoa -> pessoa instanceof Cliente)
                     .map(Pessoa::getNome)
                     .collect(Collectors.toList());
-
+            // Verifica se nao ha clientes cadastrados
             if (nomesClientes.isEmpty()) {
                 exibirMensagemErro("Não há clientes cadastrados no sistema.");
                 return;
             }
 
+            // Solicita ao instrutor que selecione um cliente para criar a ficha e atribue
+            // ao nomeClienteSelecionado
             String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
                     "Selecione um cliente:",
                     "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null,
                     nomesClientes.toArray(new String[0]),
                     nomesClientes.get(0));
 
+            // Verifica a condicao se o usuario selecionou um cliente
             if (nomeClienteSelecionado != null) {
-                // Procura a ficha existente para o cliente
+                // Procura a ficha existente para o cliente selecionado
                 FichaAcademia fichaExistente = null;
                 for (FichaAcademia ficha : academia.getFichas()) {
                     if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
@@ -351,6 +404,7 @@ public class SistemaAcademiaGUI {
                             "Já existe uma ficha para este cliente. Deseja substituir?",
                             "Substituir Ficha", JOptionPane.YES_NO_OPTION);
 
+                    // Caso o instrutor queria substituir a ficha do cliente
                     if (opcaoSubstituir == JOptionPane.YES_OPTION) {
                         // Remove a ficha existente antes de criar a nova
                         academia.removerFicha(fichaExistente);
@@ -360,27 +414,35 @@ public class SistemaAcademiaGUI {
                     }
                 }
 
+                // Cria uma nova ficha para o nomeclienteSelecionado
                 FichaAcademia ficha = new FichaAcademia(nomeClienteSelecionado);
                 boolean criandoFicha = true;
 
+                // Loop para adicionar exercicios a ficha
                 while (criandoFicha) {
                     try {
+                        // Solicita o nome do exercicio
                         String exercicio = JOptionPane.showInputDialog("Digite o nome do exercício:");
+                        // Verifica se o nome do exercicio foi fornecido e nao esta vazio
                         if (exercicio != null && !exercicio.isEmpty()) {
+                            // Solicita a quantidade de series do exercicio
                             int serie = Integer.parseInt(JOptionPane.showInputDialog("Digite o número de séries:"));
+                            // Solicita a quantidade de repeticao do exercicio
                             int repeticao = Integer
                                     .parseInt(JOptionPane.showInputDialog("Digite o número de repetições:"));
-
+                            // Adiciona os exercicios, series e repeticoes a ficha do cliente
                             ficha.adicionarExercicio(exercicio, serie, repeticao);
 
+                            // Pergunta se o instrutor ainda quer adicionar exercicios, caso queira:
                             int opcao = JOptionPane.showConfirmDialog(null,
                                     "Deseja adicionar outro exercício?",
                                     "Continuar", JOptionPane.YES_NO_OPTION);
+                            // se nao, finaliza o processo
                             if (opcao == JOptionPane.NO_OPTION) {
                                 academia.criarFicha(ficha);
                                 criandoFicha = false;
                             }
-                        } else {
+                        } else { // Exibe mensagem de erro caso o nome do exercicio nao seja valido
                             exibirMensagemErro("Nome do exercício inválido.");
                         }
                     } catch (NumberFormatException e) {
@@ -390,31 +452,43 @@ public class SistemaAcademiaGUI {
                     }
                 }
 
-                exibirMensagem("Ficha de academia criada com sucesso.");
+                exibirMensagem("Ficha de academia criada com sucesso."); // Mensagem de sucesso
             }
         }
     }
 
+    // Método para visualizar todas as fichas de academia criadas no sistema
     private static void visualizarTodasAsFichas(Academia academia) {
+        // Verifica se não há fichas de academia criadas no sistema
         if (academia.getFichas().isEmpty()) {
             exibirMensagemErro("Não há fichas de academia criadas no sistema.");
         } else {
+            // Cria um array de strings para armazenar os nomes dos clientes associados a
+            // ficha
             String[] nomesClientes = new String[academia.getFichas().size()];
+            // Percorre sobre a lista de fichas da academia
             for (int i = 0; i < academia.getFichas().size(); i++) {
+                // Para cada ficha, obtem o nome do cliente
                 nomesClientes[i] = academia.getFichas().get(i).getNomeCliente();
             }
 
+            // Solicita ao instrutor que selecione um cliente para visualizar a ficha
             String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
                     "Selecione um cliente para visualizar a ficha:",
                     "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null, nomesClientes,
                     nomesClientes[0]);
 
+            // Verifica se o usuário selecionou um cliente
             if (nomeClienteSelecionado != null) {
+                // Percorre sobre as fichas procurando pela correspondente ao cliente
+                // selecionado
                 for (FichaAcademia ficha : academia.getFichas()) {
                     if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
+                        // Constrói uma representação de texto da ficha
                         StringBuilder fichaTexto = new StringBuilder(
                                 "Ficha de " + nomeClienteSelecionado + ":\n");
 
+                        // Itera sobre os exercícios da ficha e os adiciona à representação de texto
                         for (int i = 0; i < ficha.getExercicios().size(); i++) {
                             fichaTexto.append("Exercício: ").append(ficha.getExercicios().get(i))
                                     .append(", Séries: ").append(ficha.getSeries().get(i))
@@ -422,6 +496,7 @@ public class SistemaAcademiaGUI {
                                     .append("\n");
                         }
 
+                        // Exibe a ficha de academia ao usuário
                         exibirMensagem(fichaTexto.toString());
                         break;
                     }
@@ -430,21 +505,29 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Metodo para o cliente conseguir visualizar apenas a sua propria ficha.
     private static void visualizarFicha(Academia academia, Cliente clienteLogado) {
-        if (academia.getFichas().isEmpty()) {
+        if (academia.getFichas().isEmpty()) { // Verifica se ha fichas na lista
             exibirMensagemErro("Não há fichas de academia criadas no sistema.");
         } else {
+            // Cria um array de strings para armazenar os nomes dos clientes associados a
+            // ficha
             String[] nomesClientes = new String[academia.getFichas().size()];
+            // Percorre sobre a lista de fichas da academia
             for (int i = 0; i < academia.getFichas().size(); i++) {
+                // Para cada ficha, obtem o nome do cliente
                 nomesClientes[i] = academia.getFichas().get(i).getNomeCliente();
             }
 
+            // Verifica se há um cliente logado
             if (clienteLogado != null) {
+                // Solicita ao usuário que selecione um cliente para visualizar a ficha
                 String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
                         "Selecione um cliente para visualizar a ficha:",
                         "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null, nomesClientes,
                         nomesClientes[0]);
 
+                // Verifica se o usuário selecionou um cliente
                 if (nomeClienteSelecionado != null) {
                     // Verifica se a ficha pertence ao cliente logado
                     if (!nomeClienteSelecionado.equals(clienteLogado.getNome())) {
@@ -452,18 +535,22 @@ public class SistemaAcademiaGUI {
                         return;
                     }
 
+                    // Percorre sobre as fichas procurando pela correspondente ao cliente
+                    // selecionado
                     for (FichaAcademia ficha : academia.getFichas()) {
                         if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
+                            // Constrói uma representação de texto da ficha
                             StringBuilder fichaTexto = new StringBuilder(
                                     "Ficha de " + nomeClienteSelecionado + ":\n");
 
+                            // Itera sobre os exercícios da ficha e os adiciona à representação de texto
                             for (int i = 0; i < ficha.getExercicios().size(); i++) {
                                 fichaTexto.append("Exercício: ").append(ficha.getExercicios().get(i))
                                         .append(", Séries: ").append(ficha.getSeries().get(i))
                                         .append(", Repetições: ").append(ficha.getRepeticoes().get(i))
                                         .append("\n");
                             }
-
+                            // Exibe a ficha de academia ao usuário
                             exibirMensagem(fichaTexto.toString());
                             return;
                         }
@@ -476,42 +563,66 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Metodo para adicionar exercicio a uma ficha existente
     private static void adicionarExercicio(Academia academia) {
+        // Verifica se não há usuários cadastrados no sistema
         if (academia.getPessoas().isEmpty()) {
             exibirMensagemErro("Não há usuários cadastrados no sistema.");
         } else {
-            String[] nomesClientes = new String[academia.getPessoas().size()];
-            for (int i = 0; i < academia.getPessoas().size(); i++) {
-                nomesClientes[i] = academia.getPessoas().get(i).getNome();
+            // Filtra apenas os clientes da lista de pessoas
+            List<String> nomesClientes = academia.getPessoas().stream()
+                    .filter(pessoa -> pessoa instanceof Cliente)
+                    .map(Pessoa::getNome)
+                    .collect(Collectors.toList());
+
+            // Verifica se nao ha clientes cadastrados no sistema
+            if (nomesClientes.isEmpty()) {
+                exibirMensagemErro("Não há clientes cadastrados no sistema.");
+                return;
             }
 
+            // Solicita que o Instrutor selecione um cliente
             String nomeClienteSelecionado = (String) JOptionPane.showInputDialog(null,
                     "Selecione um cliente:",
-                    "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null, nomesClientes,
-                    nomesClientes[0]);
+                    "Selecionar Cliente", JOptionPane.QUESTION_MESSAGE, null,
+                    nomesClientes.toArray(new String[0]),
+                    nomesClientes.get(0));
 
+            // Verifica se ha cliente selecionado, ou seja nao e nulo
             if (nomeClienteSelecionado != null) {
+                // Procura a ficha existente para o cliente
+                FichaAcademia fichaExistente = null;
                 for (FichaAcademia ficha : academia.getFichas()) {
                     if (ficha.getNomeCliente().equals(nomeClienteSelecionado)) {
-                        try {
-                            String exercicio = JOptionPane.showInputDialog("Digite o nome do exercício:");
-                            if (exercicio != null && !exercicio.isEmpty()) {
-                                int serie = Integer.parseInt(JOptionPane.showInputDialog("Digite o número de séries:"));
-                                int repeticao = Integer
-                                        .parseInt(JOptionPane.showInputDialog("Digite o número de repetições:"));
-
-                                ficha.adicionarExercicio(exercicio, serie, repeticao);
-                                exibirMensagem("Exercício adicionado com sucesso.");
-                            } else {
-                                exibirMensagemErro("Nome do exercício inválido.");
-                            }
-                        } catch (NumberFormatException e) {
-                            exibirMensagemErro("Erro: Insira um número válido para séries e repetições.");
-                        } catch (Exception e) {
-                            exibirMensagemErro("Ocorreu um erro inesperado: " + e.getMessage());
-                        }
+                        fichaExistente = ficha;
                         break;
                     }
+                }
+
+                // Se não houver uma ficha para o cliente, exibe mensagem de erro
+                if (fichaExistente == null) {
+                    exibirMensagemErro("Não foi encontrada uma ficha para o cliente selecionado.");
+                    return;
+                }
+
+                try {
+                    // Solicita informações sobre o novo exercício
+                    String exercicio = JOptionPane.showInputDialog("Digite o nome do exercício:");
+                    if (exercicio != null && !exercicio.isEmpty()) {
+                        int serie = Integer.parseInt(JOptionPane.showInputDialog("Digite o número de séries:"));
+                        int repeticao = Integer.parseInt(JOptionPane.showInputDialog("Digite o número de repetições:"));
+
+                        // Adiciona o exercício à ficha existente para o cliente
+                        fichaExistente.adicionarExercicio(exercicio, serie, repeticao);
+
+                        exibirMensagem("Exercício adicionado com sucesso.");
+                    } else {
+                        exibirMensagemErro("Nome do exercício inválido.");
+                    }
+                } catch (NumberFormatException e) {
+                    exibirMensagemErro("Erro: Insira um número válido para séries e repetições.");
+                } catch (Exception e) {
+                    exibirMensagemErro("Ocorreu um erro inesperado: " + e.getMessage());
                 }
             }
         }
@@ -524,7 +635,9 @@ public class SistemaAcademiaGUI {
         } else {
             // Constrói uma mensagem com as pessoas cadastradas, incluindo IDs
             StringBuilder pessoasCadastradas = new StringBuilder("Pessoas cadastradas na academia:\n");
+            // Percorre sobre a lista de pessoas
             for (Pessoa pessoa : academia.getPessoas()) {
+                // Adiciona informacoes da pessoa a mensagem
                 pessoasCadastradas.append(pessoa).append("\n");
             }
             // Exibe a mensagem com as pessoas cadastradas
@@ -532,6 +645,7 @@ public class SistemaAcademiaGUI {
         }
     }
 
+    // Metodo pra simular a realizacao de um pagamento
     private static void realizarPagamento() {
         try {
             // Carrega a imagem do QR Code a partir de um arquivo
@@ -559,11 +673,12 @@ public class SistemaAcademiaGUI {
                 opcoes[0]);
     }
 
-    // Métodos auxiliares para exibir mensagens
+    // Método auxiliar para exibir mensagens
     private static void exibirMensagem(String mensagem) {
         JOptionPane.showMessageDialog(null, mensagem);
     }
 
+    // Método auxiliar para exibir mensagens de erro
     private static void exibirMensagemErro(String mensagem) {
         JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
     }
